@@ -1,9 +1,15 @@
 import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
+<<<<<<< HEAD
 import { env } from "@/lib/env";
 import { prisma } from "@/lib/prisma";
 import { stripe } from "@/lib/stripe";
+=======
+import { getEnv } from "@/lib/env";
+import { prisma } from "@/lib/prisma";
+import { getStripeClient } from "@/lib/stripe";
+>>>>>>> 8d868f4 (fix: make build env-safe and avoid db access during compile)
 
 export async function POST(request: NextRequest) {
   const body = await request.text();
@@ -13,6 +19,12 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Missing signature" }, { status: 400 });
   }
 
+<<<<<<< HEAD
+=======
+  const env = getEnv();
+  const stripe = getStripeClient();
+
+>>>>>>> 8d868f4 (fix: make build env-safe and avoid db access during compile)
   let event: Stripe.Event;
   try {
     event = stripe.webhooks.constructEvent(body, signature, env.STRIPE_WEBHOOK_SECRET);

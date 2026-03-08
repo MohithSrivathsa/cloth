@@ -4,6 +4,8 @@ import { AddToCartForm } from "@/components/add-to-cart-form";
 import { prisma } from "@/lib/prisma";
 import { formatCurrency } from "@/utils/format";
 
+export const dynamic = "force-dynamic";
+
 export default async function ProductDetails({ params }: { params: { id: string } }) {
   const product = await prisma.product.findUnique({ where: { id: params.id } });
 

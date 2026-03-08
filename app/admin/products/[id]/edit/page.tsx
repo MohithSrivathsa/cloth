@@ -3,6 +3,11 @@ import { AdminProductForm } from "@/components/admin-product-form";
 import { prisma } from "@/lib/prisma";
 import { isAdminAuthenticated } from "@/utils/auth";
 
+<<<<<<< HEAD
+=======
+export const dynamic = "force-dynamic";
+
+>>>>>>> 8d868f4 (fix: make build env-safe and avoid db access during compile)
 export default async function EditProductPage({ params }: { params: { id: string } }) {
   if (!isAdminAuthenticated()) {
     redirect("/admin/login");
