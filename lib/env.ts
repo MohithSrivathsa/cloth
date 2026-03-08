@@ -10,12 +10,21 @@ const envSchema = z.object({
   ADMIN_PASSWORD: z.string().min(8)
 });
 
-export const env = envSchema.parse({
-  DATABASE_URL: process.env.DATABASE_URL,
-  STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
-  STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
-  STRIPE_PRICE_CURRENCY: process.env.STRIPE_PRICE_CURRENCY,
-  NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
-  ADMIN_EMAIL: process.env.ADMIN_EMAIL,
-  ADMIN_PASSWORD: process.env.ADMIN_PASSWORD
+export function getEnv() {
+  return envSchema.parse({
+    DATABASE_URL: process.env.DATABASE_URL,
+    STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
+    STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
+    STRIPE_PRICE_CURRENCY: process.env.STRIPE_PRICE_CURRENCY,
+    NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
+    ADMIN_EMAIL: process.env.ADMIN_EMAIL,
+    ADMIN_PASSWORD: process.env.ADMIN_PASSWORD
+  });
+}
+
+// Keep `env` export for compatibility but make it lazy
+export const env = new Proxy({} as z.infer<typeof envSchema>, {
+  get(_, prop) {
+    return getEnv()[prop as keyof z.infer<typeof envSchema>];
+  }
 });
