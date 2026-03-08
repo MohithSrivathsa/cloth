@@ -4,6 +4,8 @@ import { prisma } from "@/lib/prisma";
 import { isAdminAuthenticated } from "@/utils/auth";
 import { formatCurrency } from "@/utils/format";
 
+export const dynamic = "force-dynamic";
+
 export default async function AdminDashboard() {
   if (!isAdminAuthenticated()) {
     redirect("/admin/login");

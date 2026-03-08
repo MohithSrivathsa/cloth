@@ -3,6 +3,11 @@ import { prisma } from "@/lib/prisma";
 import { isAdminAuthenticated } from "@/utils/auth";
 import { formatCurrency } from "@/utils/format";
 
+<<<<<<< HEAD
+=======
+export const dynamic = "force-dynamic";
+
+>>>>>>> 8d868f4 (fix: make build env-safe and avoid db access during compile)
 export default async function AdminOrdersPage() {
   if (!isAdminAuthenticated()) {
     redirect("/admin/login");

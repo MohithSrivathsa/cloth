@@ -1,7 +1,7 @@
 import { ProductCard } from "@/components/product-card";
 import { prisma } from "@/lib/prisma";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
   const products = await prisma.product.findMany({ orderBy: { createdAt: "desc" } });

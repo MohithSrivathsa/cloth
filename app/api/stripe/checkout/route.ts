@@ -1,12 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
 import { checkoutSchema } from "@/lib/validations";
+<<<<<<< HEAD
 import { env } from "@/lib/env";
 import { stripe } from "@/lib/stripe";
+=======
+import { getEnv } from "@/lib/env";
+import { getStripeClient } from "@/lib/stripe";
+>>>>>>> 8d868f4 (fix: make build env-safe and avoid db access during compile)
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const { items } = checkoutSchema.parse(body);
+<<<<<<< HEAD
+=======
+    const env = getEnv();
+    const stripe = getStripeClient();
+>>>>>>> 8d868f4 (fix: make build env-safe and avoid db access during compile)
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
