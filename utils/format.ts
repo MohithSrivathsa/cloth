@@ -1,0 +1,6 @@
+export const formatCurrency = (value: number, currency = "USD") =>
+  new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency,
+    minimumFractionDigits: 2
+  }).format(value / 100);
